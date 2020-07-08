@@ -11,7 +11,9 @@
 
 Make sure you have docker installed on your laptop. Run following command to start a kafka cluster
 ----
-$docker-compose -f docker-compose-single-broker.yml up -d
+$ git clone https://github.com/wurstmeister/kafka-docker.git
+$ cd kafka-docker
+$ docker-compose -f docker-compose-single-broker.yml up -d
 ----
 
 ==== Step 2: Create Kafka Topics
