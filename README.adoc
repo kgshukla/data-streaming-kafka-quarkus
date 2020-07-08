@@ -1,0 +1,84 @@
+= Data Streaming with Kafka and Quarkus
+
+==== Problem Statement
+
+
+==== Pre-requisite
+
+1. Make sure you have docker and kakfa cli available in your laptop/env
+
+==== Step 1: Run Kafka Cluster
+
+Make sure you have docker installed on your laptop. Run following command to start a kafka cluster
+----
+$docker-compose -f docker-compose-single-broker.yml up -d
+----
+
+==== Step 2: Create Kafka Topics
+
+We will now create left-stream-topic, right-stream-topic, stream-stream-outerjoin, processed-topic topics using kafka cli
+
+----
+$ cd <folder location where kafka cli binaries are located>
+$ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic left-stream-topic
+$ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic right-stream-topic
+$ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic stream-stream-outerjoin
+$ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic processed-topic
+
+----
+
+==== Step 3: Run the streaming application
+
+----
+$ cd quarkus-kafka-streaming
+
+# start the application in dev mode. You could also package the application as a jar file and start using 'java -jar' command
+$ ./mvnw compile quarkus:dev
+
+----
+open a new terminal and initialize the application. This step wasn't needed if the application was defined with ApplicationScoped notation
+
+----
+$ curl localhost:8080/startstream\
+----
+
+==== Step 4: Run the producer application
+
+Open a new terminal and run the following commands
+----
+$ cd quarkus-kafka-producer
+
+$ ./mvnw compile quarkus:dev
+
+----
+
+==== Step 5: Watch the processed-topic topic
+
+----
+$ cd <folder location where kafka cli binaries are located>
+$ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processed-topic --property print.key=true --property print.timestamp=true
+----
+
+==== Step 6: Simulate various use cases
+
+a. Use case 1 - Send few records to left-stream-topic, right-stream-topic topics
+couple of records will be missing in left-stream-topic
+
+----
+$ curl localhost:8082/sendfewrecords
+----
+
+b. Use case 2 - Send one record to left-stream-topic only
+
+----
+$ curl localhost:8082/sendoneleftrecord
+
+# to see records that are present in the state store and not yet processed
+$ curl localhost:8080/storedata
+----
+
+c. Use case 3 - send 100000 records to both left-stream-topic, right-stream-topic topics
+
+----
+$ curl localhost:8082/sendmanyrecords
+----
