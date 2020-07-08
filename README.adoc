@@ -39,7 +39,7 @@ $ ./mvnw compile quarkus:dev
 open a new terminal and initialize the application. This step wasn't needed if the application was defined with ApplicationScoped notation
 
 ----
-$ curl localhost:8080/startstream\
+$ curl localhost:8080/startstream
 ----
 
 ==== Step 4: Run the producer application
@@ -61,14 +61,14 @@ $ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processe
 
 ==== Step 6: Simulate various use cases
 
-a. Use case 1 - Send few records to left-stream-topic, right-stream-topic topics
+Use case 1 - Send few records to left-stream-topic, right-stream-topic topics
 couple of records will be missing in left-stream-topic
 
 ----
 $ curl localhost:8082/sendfewrecords
 ----
 
-b. Use case 2 - Send one record to left-stream-topic only
+Use case 2 - Send one record to left-stream-topic only
 
 ----
 $ curl localhost:8082/sendoneleftrecord
@@ -77,7 +77,7 @@ $ curl localhost:8082/sendoneleftrecord
 $ curl localhost:8080/storedata
 ----
 
-c. Use case 3 - send 100000 records to both left-stream-topic, right-stream-topic topics
+Use case 3 - send 100000 records to both left-stream-topic, right-stream-topic topics
 
 ----
 $ curl localhost:8082/sendmanyrecords
