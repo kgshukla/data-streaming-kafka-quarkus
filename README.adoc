@@ -43,7 +43,7 @@ $ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-fac
 
 ----
 $ git clone https://github.com/kgshukla/data-streaming-kafka-quarkus.git
-$ cd quarkus-kafka-streaming
+$ cd data-streaming-kafka-quarkus/quarkus-kafka-streaming
 
 # start the application in dev mode. You could also package the application as a jar file and start using 'java -jar' command
 $ ./mvnw compile quarkus:dev
@@ -59,7 +59,7 @@ $ curl localhost:8080/startstream
 
 Open a new terminal and run the following commands
 ----
-$ cd quarkus-kafka-producer
+$ cd data-streaming-kafka-quarkus/quarkus-kafka-producer
 
 $ ./mvnw compile quarkus:dev
 
@@ -75,13 +75,16 @@ $ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic processe
 ==== Step 6: Simulate various use cases
 
 Use case 1 - Send few records to left-stream-topic, right-stream-topic topics
-couple of records will be missing in left-stream-topic
+
+Couple of records will be missing in left-stream-topic. You will notice that punctuator will process those records which have been put into state store.
 
 ----
 $ curl localhost:8082/sendfewrecords
 ----
 
 Use case 2 - Send one record to left-stream-topic only
+
+You will notice that punctuator will process those records which have been put into state store.
 
 ----
 $ curl localhost:8082/sendoneleftrecord
