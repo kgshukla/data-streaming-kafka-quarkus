@@ -13,6 +13,16 @@ Make sure you have docker installed on your laptop. Run following command to sta
 ----
 $ git clone https://github.com/wurstmeister/kafka-docker.git
 $ cd kafka-docker
+----
+
+open docker-compose-single-broker.yml and change the following line 
+KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+
+to 
+
+KAFKA_ADVERTISED_HOST_NAME: localhost
+
+----
 $ docker-compose -f docker-compose-single-broker.yml up -d
 ----
 
