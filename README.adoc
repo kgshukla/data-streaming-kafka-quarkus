@@ -32,6 +32,7 @@ $ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-fac
 ==== Step 3: Run the streaming application
 
 ----
+$ git clone https://github.com/kgshukla/data-streaming-kafka-quarkus.git
 $ cd quarkus-kafka-streaming
 
 # start the application in dev mode. You could also package the application as a jar file and start using 'java -jar' command
