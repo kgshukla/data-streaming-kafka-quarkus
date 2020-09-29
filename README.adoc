@@ -2,6 +2,8 @@
 
 ==== Problem Statement
 
+The problem statement is described here
+https://developers.redhat.com/blog/2020/09/28/build-a-data-streaming-pipeline-using-kafka-streams-and-quarkus/
 
 ==== Pre-requisite
 
